@@ -31,4 +31,10 @@ print(titanic_dataset.tail())
 ![Data Description](described_data.png)
 ![Data Info](Info.png)
 
-
+- From the given data we can see that there exists some columns that do not contribute to the survival:
+- - "PassengerId"
+  - "Name"
+  - "Ticket"
+  - "Cabin"
+- There are also some missing data in the "Age" and "Embarked" columns
+  
