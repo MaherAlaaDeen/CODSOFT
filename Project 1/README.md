@@ -61,7 +61,106 @@ plt.xticks(survived_counts.index, ['Not Survived', 'Survived'])
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 ```
+![Survival](SurvivalHistogram.png)
 
+## Plot the number of Survivors by gender
+```python
+# Filter data for survived passengers
+survived = titanic_dataset[titanic_dataset['Survived'] == 1]
 
+# Group by 'Sex' and count the number of survivors
+survivors_by_sex = survived.groupby('Sex').size()
 
+# Plotting
+plt.bar(survivors_by_sex.index, survivors_by_sex.values, color=['pink', 'blue'])
+plt.title('Number of Survivors by Gender')
+plt.xlabel('Gender')
+plt.ylabel('Number of Survivors')
+plt.show()
+```
+![Survivors by Gender](SurvivorsGender.png)
+ ## Plot the Survival Rate by Class
+ ```python
+# Group by 'Pclass' and calculate survival rate
+survival_rate_by_class = titanic_dataset.groupby('Pclass')['Survived'].mean()
+
+# Plotting
+plt.bar(survival_rate_by_class.index, survival_rate_by_class.values, color=['red', 'blue', 'green'])
+plt.title('Survival Rate by Passenger Class')
+plt.xlabel('Passenger Class')
+plt.ylabel('Survival Rate')
+plt.xticks(survival_rate_by_class.index)
+plt.show()
+```
+![Survival rate by Class](SurvivalRateClass.png)
+- We can clearly see that the Dataset is imbalanced
+- Instead of doing a regular split, we'll be doing a stratified split to maintain class proportion and consistency across splits
+
+## Preprocessing the Dataset
+### Dropping irrelevant columns
+```python
+titanic_dataset.drop(['PassengerId', 'Name', 'Ticket', 'Cabin'], axis = 1, inplace = True)
+```
+### Handling missing values
+```python
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(missing_values = np.nan, strategy = 'mean')
+#imputing Age
+titanic_dataset['Age'] = imputer.fit_transform(titanic_dataset[['Age']])
+#imputing Embarked
+titanic_dataset['Embarked'].fillna('S', inplace=True)
+```
+### Creating the matrix of features and the dependent variable
+```python
+X = titanic_dataset.drop('Survived', axis = 1)
+y = titanic_dataset['Survived']
+
+print('Matrix of features:\n ', X)
+print('Dependent variable:\n ',y)
+```
+
+### Encoding Categorical Data
+```python
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+# Identify the categorical data
+categorical_features = ['Sex', 'Embarked', 'Pclass']
+# Implement an instance of the ColumnTransformer class
+ct = ColumnTransformer(transformers = [('encoder', OneHotEncoder(), categorical_features)], remainder = 'passthrough')
+X = ct.fit_transform(X)
+X = pd.DataFrame(X)
+print(X.head())
+X = np.array(X)
+print('Encoded Categorical Matrix of features:\n ', X)
+```
+### Encoding the dependent variable
+```python
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+y = le.fit_transform(y)
+print('Encoded Categorical dependent variable vector:\n ', y)
+```
+### Splitting the dataset into train and test
+```python
+from sklearn.model_selection import StratifiedShuffleSplit
+# Initialize StratifiedShuffleSplit
+sss = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=1)
+# Split the data using StratifiedShuffleSplit
+for train_index, test_index in sss.split(X, y):
+    X_train, X_test = X[train_index], X[test_index]
+    y_train, y_test = y[train_index], y[test_index]
+print('x-train: ',X_train)
+print('x-test: ',X_test)
+print('y-train: ',y_train)
+print('y-test: ',y_test)
+```
+### Feature Scaling: Standardization
+```python
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+print('Featured Scaled x-train:\n ',X_train)
+print('Featured Scaled x-test:\n ',X_test)
+```
 
