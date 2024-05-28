@@ -212,5 +212,101 @@ best_accuracy = max(accuracies)
 best_model = list(classifiers.keys())[accuracies.index(best_accuracy)]
 print(f"\nBest Model: {best_model} with Accuracy: {best_accuracy}")
 ```
+#### Results:
+- Random Forest Classifier Accuracy: 0.8324022346368715
+- K-Nearest Neighbors Classifier Accuracy: 0.8435754189944135
+- Support Vector Machine Classifier Accuracy: 0.8491620111731844
+- Best Model: Support Vector Machine Classifier with Accuracy: 0.8491620111731844
+
+### Fine Tuning the Support Vector Classifier Hyperparametrs
+#### Import GridsearchCV
+```python
+from sklearn.model_selection import GridSearchCV
+```
+#### Define the parameter grid to search
+```python
+param_grid = {
+    'C': [0.1, 1, 10, 100],  # Regularization parameter
+    'gamma': [1, 0.1, 0.01, 0.001],  # Kernel coefficient
+    'kernel': ['rbf']  # Kernel type
+}
+```
+#### Initialize the SVM classifier
+```python
+svm_classifier = SVC(kernel='rbf')
+```
+#### Initialize GridSearchCV
+```python
+grid_search = GridSearchCV(estimator=svm_classifier, param_grid=param_grid, cv=5, n_jobs=-1, scoring='accuracy')
+```
+#### Perform grid search
+```python
+grid_search.fit(X_train, y_train)
+```
+#### Extract results
+```python
+results = grid_search.cv_results_
+means = results['mean_test_score']
+params = results['params']
+```
+#### Get the best parameters and best score
+```python
+best_params = grid_search.best_params_
+best_score = grid_search.best_score_
+
+print("Best Parameters:", best_params)
+print("Best Score:", best_score)
+```
+#### Instantiate SVM Classifier with best parameters
+```python
+best_svm_classifier = SVC(**best_params)
+```
+#### Train the model with best parameters
+```python
+best_svm_classifier.fit(X_train, y_train)
+```
+#### Predictions and accuracy with tuned SVM Classifier
+```python
+svm_pred_tuned = best_svm_classifier.predict(X_test)
+svm_accuracy_tuned = accuracy_score(y_test, svm_pred_tuned)
+print("Tuned Support Vector Machine Classifier Accuracy:", svm_accuracy_tuned)
+```
+#### Results:
+- Best Parameters: {'C': 1, 'gamma': 0.1, 'kernel': 'rbf'}
+- Best Score: 0.8131980695360976
+- Tuned Support Vector Machine Classifier Accuracy: 0.8435754189944135
+
+#### Generating Precision, Confusion Matrix, Recall and F1-score
+```python
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+
+# Confusion matrix
+conf_matrix = confusion_matrix(y_test, svm_pred_tuned)
+print("Confusion Matrix:")
+print(conf_matrix)
+
+# Accuracy score
+accuracy = accuracy_score(y_test, svm_pred_tuned)
+print("Accuracy Score:", accuracy)
+
+# Precision
+precision = precision_score(y_test, svm_pred_tuned, average='weighted')
+print("Precision:", precision)
+
+# Recall
+recall = recall_score(y_test, svm_pred_tuned, average='weighted')
+print("Recall:", recall)
+
+# F1 Score
+f1 = f1_score(y_test, svm_pred_tuned, average='weighted')
+print("F1 Score:", f1)
+```
+### Final Results:
+- Accuracy Score: 0.8435754189944135
+- Precision: 0.8468667573190911
+- Recall: 0.8435754189944135
+- F1 Score: 0.8394243669067961
+- Confusion Matrix: [[103   7]
+ [ 21  48]]
 
 
