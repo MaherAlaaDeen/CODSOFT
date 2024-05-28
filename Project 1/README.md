@@ -163,4 +163,48 @@ X_test = sc.transform(X_test)
 print('Featured Scaled x-train:\n ',X_train)
 print('Featured Scaled x-test:\n ',X_test)
 ```
+## Machine Learning
+### Choosing the best between 3 Classification Models (KNN, SVM, Random Forest Classifier)
+#### Import libraries
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+```
+#### Define Classifiers
+```python
+classifiers = {
+    "Random Forest Classifier": RandomForestClassifier(n_estimators=100, random_state=42),
+    "K-Nearest Neighbors Classifier": KNeighborsClassifier(n_neighbors=5),
+    "Support Vector Machine Classifier": SVC(kernel='rbf', random_state=42)
+}
+
+accuracies = []
+```
+#### Loop through classifiers: Get the best Model with the best accuracy
+```python
+for name, classifier in classifiers.items():
+    classifier.fit(X_train, y_train)
+    y_pred = classifier.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    accuracies.append(accuracy)
+    print(f"{name} Accuracy: {accuracy}")
+```
+#### Plotting the accuracies
+```python
+fig, ax = plt.subplots()
+models = classifiers.keys()
+y_pos = np.arange(len(models))
+ax.barh(y_pos, accuracies, align='center')
+ax.set_yticks(y_pos)
+ax.set_yticklabels(models)
+ax.invert_yaxis()  
+ax.set_xlabel('Accuracy')
+ax.set_title('Classifier Accuracies')
+plt.show()
+```
+![Models Accuracies](ModelsAccuracies)
+
+
 
