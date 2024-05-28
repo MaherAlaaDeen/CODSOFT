@@ -11,3 +11,20 @@ about individual passengers, such as their age, gender, ticket
 class, fare, cabin, and whether or not they survived.
 
 # Data Preprocessing
+## Import libraries
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+```
+## Load the Dataset
+```python
+titanic_dataset = pd.read_csv('/content/Titanic-Dataset.csv')
+```
+## Get some Info and description about the dataset
+```python
+print(titanic_dataset.describe())
+print(titanic_dataset.info())
+print(titanic_dataset.head())
+print(titanic_dataset.tail())
+```
