@@ -28,5 +28,5 @@ print(titanic_dataset.info())
 print(titanic_dataset.head())
 print(titanic_dataset.tail())
 ```
-![Alt text](described_data.png)
+![Data Description](described_data.png)
 ![Data Info](data info.png)
