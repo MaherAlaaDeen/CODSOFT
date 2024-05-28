@@ -204,7 +204,13 @@ ax.set_xlabel('Accuracy')
 ax.set_title('Classifier Accuracies')
 plt.show()
 ```
-![Models Accuracies](ModelsAccuracies)
+![Models Accuracies](ModelsAccuracies.png)
 
+#### Find the best model
+```python
+best_accuracy = max(accuracies)
+best_model = list(classifiers.keys())[accuracies.index(best_accuracy)]
+print(f"\nBest Model: {best_model} with Accuracy: {best_accuracy}")
+```
 
 
