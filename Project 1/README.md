@@ -38,3 +38,30 @@ print(titanic_dataset.tail())
   - "Cabin"
 - There are also some missing data in the "Age" and "Embarked" columns
   
+## Plot a Heatmap: Understand the features and identify the relation between features and survival
+```python
+numeric_columns = titanic_dataset.select_dtypes(include=["int64", "float64"])
+import seaborn as sns
+sns.heatmap(numeric_columns.corr(), cmap = "YlGnBu")
+plt.show()
+```
+![Heatmap](heatmap.png)
+
+## Check if Dataset is imbalanced
+```python
+survived_counts = titanic_dataset['Survived'].value_counts()
+
+# Plot the histogram
+plt.figure(figsize=(8, 6))
+plt.bar(survived_counts.index, survived_counts.values, color=['red', 'green'])
+plt.title('Survival Histogram')
+plt.xlabel('Survived')
+plt.ylabel('Count')
+plt.xticks(survived_counts.index, ['Not Survived', 'Survived'])
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+```
+
+
+
+
