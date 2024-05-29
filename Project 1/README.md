@@ -36,6 +36,7 @@ print(titanic_dataset.tail())
   - "Name"
   - "Ticket"
   - "Cabin"
+- The reason behind it, is that they do not contribute valuable information and may introduce noise or unnecessary complexity.
 - There are also some missing data in the "Age" and "Embarked" columns
   
 ## Plot a Heatmap: Understand the features and identify the relation between features and survival
