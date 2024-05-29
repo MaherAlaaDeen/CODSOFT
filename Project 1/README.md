@@ -114,7 +114,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
-![Survival Age]()
+![Survival Age](SurvivalAge.png)
 
 - We can clearly see that the Dataset is imbalanced
 - Instead of doing a regular split, we'll be doing a stratified split to maintain class proportion and consistency across splits
