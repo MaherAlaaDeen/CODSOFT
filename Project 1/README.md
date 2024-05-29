@@ -94,6 +94,28 @@ plt.xticks(survival_rate_by_class.index)
 plt.show()
 ```
 ![Survival rate by Class](SurvivalRateClass.png)
+
+## Plot the Survival with respect to Age
+```python
+# Filter out rows with missing age data
+titanic_data = titanic_dataset.dropna(subset=['Age'])
+
+# Separate data into survived and not survived groups
+survived = titanic_data[titanic_data['Survived'] == 1]
+not_survived = titanic_data[titanic_data['Survived'] == 0]
+
+# Plot age against survival
+plt.figure(figsize=(10, 6))
+plt.hist([survived['Age'], not_survived['Age']], bins=20, color=['skyblue', 'salmon'], edgecolor='black', label=['Survived', 'Not Survived'])
+plt.title('Age Distribution by Survival Status')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+![Survival Age]()
+
 - We can clearly see that the Dataset is imbalanced
 - Instead of doing a regular split, we'll be doing a stratified split to maintain class proportion and consistency across splits
 
