@@ -34,7 +34,7 @@ Sales_dataset.info()
 ```
 ![data info](info.png)
 - From the given observation we can deduce that there is no missing data to handle.
-- Moreover there is no need to categorical data to be encoded
+- Moreover there is no need for the categorical data to be encoded
 # Plot a Heatmap: Understand the features and identify the relation between features and Sales
 ```python
 import seaborn as sns
