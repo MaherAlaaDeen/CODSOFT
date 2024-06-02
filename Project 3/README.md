@@ -25,3 +25,7 @@ IRIS_dataset.head()
 ```python
 IRIS_dataset.describe()
 ```
+![Described data](describe.png)
+```python
+IRIS_dataset.info()
+```
