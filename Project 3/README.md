@@ -205,16 +205,7 @@ from sklearn.metrics import classification_report
 class_report = classification_report(y_test, y_pred)
 print("Classification Report:\n", class_report)
 ```
-- Classification Report:
-               precision    recall  f1-score   support
 
-           0       1.00      1.00      1.00        14
-           1       0.94      0.94      0.94        18
-           2       0.92      0.92      0.92        13
-
-    accuracy                           0.96        45
-   macro avg       0.96      0.96      0.96        45
-weighted avg       0.96      0.96      0.96        45
 
 ### making a prediction
 ```python
