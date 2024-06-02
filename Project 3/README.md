@@ -35,3 +35,4 @@ IRIS_dataset.info()
 ```python
 IRIS_dataset.isnull().sum()
 ```
+![Null values](null.png)
