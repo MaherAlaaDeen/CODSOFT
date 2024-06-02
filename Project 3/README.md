@@ -29,3 +29,4 @@ IRIS_dataset.describe()
 ```python
 IRIS_dataset.info()
 ```
+![Info](info.png)
