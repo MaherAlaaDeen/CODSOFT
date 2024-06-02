@@ -205,7 +205,7 @@ from sklearn.metrics import classification_report
 class_report = classification_report(y_test, y_pred)
 print("Classification Report:\n", class_report)
 ```
-
+![Classification Report](report.png)
 
 ### making a prediction
 ```python
