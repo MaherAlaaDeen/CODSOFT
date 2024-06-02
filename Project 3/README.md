@@ -20,3 +20,4 @@ IRIS_dataset = pd.read_csv('/content/IRIS.csv')
 ```python
 IRIS_dataset.head()
 ```
+![Data Head](head.png)
