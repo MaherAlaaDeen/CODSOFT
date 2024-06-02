@@ -30,3 +30,8 @@ IRIS_dataset.describe()
 IRIS_dataset.info()
 ```
 ![Info](info.png)
+
+## Check for null values
+```python
+IRIS_dataset.isnull().sum()
+```
