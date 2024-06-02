@@ -1,2 +1,2 @@
-# CODSFOT
+# CODSOFT
 Data Science Internship
