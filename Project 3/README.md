@@ -36,3 +36,8 @@ IRIS_dataset.info()
 IRIS_dataset.isnull().sum()
 ```
 ![Null values](null.png)
+- From these observations we can deduce that:
+- - No missing values or null values.
+  - We should Label encode the dependent variable 'species'.
+  - Feature engineering: Standardization to improve the performance of the model
+ 
