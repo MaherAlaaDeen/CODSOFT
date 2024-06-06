@@ -237,7 +237,56 @@ print("Classification Report:\n", class_report)
 - F1 Score:  0.9989176965891743
 
 
+![Classification Report](report.png)
 
+# Making a prediction
+```python
+# predict to see if the transaction is valid or fraud
+input_data = np.array([406.0, -2.3122265423263, 1.95199201064158, -1.60985073229769, 3.9979055875468, -0.522187864667764, -1.42654531920595, -2.53738730624579, 1.39165724829804, -2.77008927719433, -2.77227214465915, 3.20203320709635, -2.89990738849473, -0.595221881324605, -4.28925378244217, 0.389724120274487, -1.14074717980657, -2.83005567450437, -0.0168224681808257, 0.416955705037907, 0.126910559061474, 0.517232370861764, -0.0350493686052974, -0.465211076182388, 0.320198198514526, 0.0445191674731724, 0.177839798284401, 0.261145002567677, -0.143275874698919, 0.0]).reshape(-1, 30)
+
+# Normalize the input data
+input_data_normalized = sc.transform(input_data)
+
+# Predict the value
+predicted_value = classifier.predict(input_data_normalized)
+
+print(predicted_value)
+```
+## Result
+[1.]
+
+# Cross-Validation
+```python
+from sklearn.model_selection import cross_val_score, KFold
+from sklearn.ensemble import RandomForestClassifier
+
+# Define your Random Forest classifier
+model = RandomForestClassifier(n_estimators=100, random_state=1)
+
+# Define the number of folds for cross-validation
+num_folds = 5
+
+# Define the cross-validation method 
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=1)
+
+# Perform cross-validation
+cv_scores = cross_val_score(model, X, y, cv=kf, scoring='accuracy')
+
+# Print the cross-validation scores
+print("Cross-Validation Scores:", cv_scores)
+
+# Print the mean and standard deviation of the cross-validation scores
+print("Mean CV Accuracy:", cv_scores.mean())
+print("Std CV Accuracy:", cv_scores.std())
+```
+## Result
+Cross-Validation Scores: [0.99949824 1.         0.99949824 0.99949824 0.99899649]
+
+Mean CV Accuracy: 0.9994982438534873
+
+Std CV Accuracy: 0.00031733845059393366
+
+Overall, the high accuracy, consistent performance metrics, and cross-validation results suggest that the model is not overfitting to the training data.
 
 
 
