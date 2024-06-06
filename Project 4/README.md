@@ -30,3 +30,50 @@ Credit_dataset.info()
 ```python
 print(Credit_dataset.isnull().sum())
 ```
+![Null Values](null.png)
+
+## Check for Missing Values
+```python
+Credit_dataset.isna().sum()
+```
+![Missing Data](missing.png)
+
+# Visualization
+## Plotting a Heatmap
+```python
+numeric_columns = Credit_dataset.select_dtypes(include=["int64", "float64"])
+import seaborn as sns
+sns.heatmap(numeric_columns.corr(), cmap = "YlGnBu")
+plt.show()
+```
+![heatmap](heatmap.png)
+## Checking the 'Class' Count
+```python
+Credit_dataset['Class'].value_counts()
+```
+![Count](ClassCount.png)
+
+## Plotting a bar chart to Visualize the 'Class' Count
+```python
+Class_counts = Credit_dataset['Class'].value_counts()
+
+#plot the bar chart
+plt.figure(figsize=(10, 8))
+sns.barplot(x=Class_counts.index, y=Class_counts.values, color='red')
+plt.xlabel('Class')
+plt.ylabel('Count')
+plt.title('Count of Each Class in Iris Dataset')
+plt.show()
+```
+![Class Count](imbalance.png)
+
+## Plotting the distribution of Features
+```python
+Credit_dataset.hist(bins=30, figsize=(30, 30))
+```
+![Distribution](distribution.png)
+- From the Above figures and data we can deduce the following:
+- - An imbalance occurs in the 'Class' column
+  - We have to handle missing values
+  - We have to normalize the features
+## 
