@@ -4,3 +4,4 @@ Data Science Internship
 ### Project 1: Titanic Survival Prediction
 ### Project 2: Sales Prediction Using Python
 ### Project 3: IRIS Flower Classification
+### Project 4: Credit Card Fraud Detection
